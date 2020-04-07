@@ -1,38 +1,3 @@
-<!--<template>-->
-<!--  <v-cotainer>-->
-<!--  <v-row>-->
-<!--    <v-col-->
-<!--      cols="12"-->
-<!--      sm="12"-->
-<!--      md="6"-->
-<!--      class="my-n4">-->
-<!--            <v-card  class="mx-6" outlined>-->
-<!--              <v-toolbar flat dense  dark>-->
-<!--                 <v-toolbar-title>Register</v-toolbar-title>-->
-<!--              </v-toolbar>-->
-
-<!--              <div>-->
-<!--              <v-text-field-->
-<!--                type="email"-->
-<!--                name="email"-->
-<!--                v-model="email"-->
-<!--                label="E-mail"/>-->
-<!--              <br>-->
-<!--              <v-text-field-->
-<!--                type="password"-->
-<!--                name="password"-->
-<!--                v-model="password"-->
-<!--                label="Password"/>-->
-<!--              <br>-->
-<!--              <div class="error" v-html="error"></div>-->
-<!--              <br>-->
-<!--              <v-btn class="ma-2" outlined @click="register">Register</v-btn>-->
-<!--              </div>-->
-<!--            </v-card>-->
-<!--          </v-col>-->
-<!--        </v-row>-->
-<!--        </v-cotainer>-->
-<!--</template>-->
 <template>
   <v-card flat>
     <v-card
@@ -78,10 +43,12 @@ export default {
   methods: {
     async register () {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (e) {
         this.error = e.response.data.error
       }
