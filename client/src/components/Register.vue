@@ -1,37 +1,27 @@
 <template>
-  <v-card flat>
-    <v-card
-      class="mx-auto"
-      max-width="500"
-      style="margin-top: 20px;"
-    >
-      <v-toolbar flat>
-        <v-toolbar-title style="color: dimgrey">Register</v-toolbar-title>
-      </v-toolbar>
-      <v-divider></v-divider>
-      <v-card-text>
-        <v-text-field
-          type="email"
-          name="email"
-          v-model="email"
-          label="E-mail"/>
-        <br>
-        <v-text-field
-          type="password"
-          name="password"
-          v-model="password"
-          label="Password"/>
-        <br>
-        <div class="error" v-html="error"></div>
-        <br>
+  <panel title="Register">
+    <v-text-field
+      type="email"
+      name="email"
+      v-model="email"
+      label="E-mail"/>
+    <br>
+    <v-text-field
+      type="password"
+      name="password"
+      v-model="password"
+      label="Password"/>
+    <br>
+    <div class="error" v-html="error"></div>
+    <br>
         <v-btn class="ma-2" outlined @click="register">Register</v-btn>
-      </v-card-text>
-    </v-card>
-  </v-card>
+  </panel>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
+
 export default {
   data () {
     return {
@@ -53,13 +43,16 @@ export default {
         this.error = e.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.error {
-  color: white;
-}
+  .error {
+    color: white;
+  }
 </style>

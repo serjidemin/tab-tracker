@@ -13,19 +13,19 @@
         </span>
       </v-toolbar-title>
 
-<!--      TODO: Implement Me-->
-<!--      <v-toolbar-items style="margin-left: 10px">-->
-<!--        <v-btn color="blue lighten-3"-->
-<!--               depressed>-->
-<!--          <v-icon left>mdi-folder-open</v-icon>-->
-<!--          BROWSE-->
-<!--        </v-btn>-->
-<!--      </v-toolbar-items>-->
+      <v-toolbar-items style="margin-left: 10px">
+        <v-btn
+          color="blue lighten-3"
+          depressed
+          to="songs">
+            <v-icon left>mdi-folder-open</v-icon>
+          BROWSE
+        </v-btn>
+      </v-toolbar-items>
 
       <v-spacer></v-spacer>
-            <v-toolbar-items>
+            <v-toolbar-items v-if="!$store.state.isUserLoggedIn">
               <v-btn
-                v-if="!$store.state.isUserLoggedIn"
                 color="blue lighten-3"
                 depressed
                 to="login">
@@ -34,9 +34,8 @@
               </v-btn>
             </v-toolbar-items>
 
-            <v-toolbar-items>
+            <v-toolbar-items v-if="!$store.state.isUserLoggedIn">
               <v-btn
-                v-if="!$store.state.isUserLoggedIn"
                 color="blue lighten-3"
                 depressed
                 to="register">
@@ -45,30 +44,37 @@
               </v-btn>
             </v-toolbar-items>
 
-      <v-toolbar-title v-if="$store.state.isUserLoggedIn">
-          {{ $store.state.user.email }}
-      </v-toolbar-title>
+      <v-toolbar-items v-if="$store.state.isUserLoggedIn">
+        <v-menu
+          left
+          bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              color="blue lighten-3"
+              depressed
+              v-on="on">
+              {{ $store.state.user.email }}
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
 
-      <v-menu
-        left
-        bottom
-        v-if="$store.state.isUserLoggedIn">
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            v-for="n in 3"
-            :key="n"
-            @click="() => {}"
-          >
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+          <v-list>
+            <v-list-item
+              @click="() => {}"
+            >
+              <v-list-item-title>Option 1</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              @click="logout"
+            >
+              <v-list-item-title>
+                <v-icon left color="black">mdi-logout</v-icon>
+                Log Out
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-toolbar-items>
     </v-app-bar>
   </div>
 </template>
@@ -78,6 +84,13 @@ export default {
   methods: {
     navigateTo (route) {
       this.$router.push(route)
+    },
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({
+        name: 'root'
+      })
     }
   }
 }
