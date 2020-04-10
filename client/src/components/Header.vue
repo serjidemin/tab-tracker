@@ -4,6 +4,7 @@
       color="blue lighten-3"
       dense
       dark
+      fixed
     >
 <!--      <v-app-bar-nav-icon></v-app-bar-nav-icon>-->
 
@@ -17,7 +18,7 @@
         <v-btn
           color="blue lighten-3"
           depressed
-          to="songs">
+          to="/songs">
             <v-icon left>mdi-folder-open</v-icon>
           BROWSE
         </v-btn>
@@ -28,7 +29,7 @@
               <v-btn
                 color="blue lighten-3"
                 depressed
-                to="login">
+                to="/login">
                 <v-icon left>mdi-account</v-icon>
                 Sign IN
               </v-btn>
@@ -38,7 +39,7 @@
               <v-btn
                 color="blue lighten-3"
                 depressed
-                to="register">
+                to="/register">
                 <v-icon left>mdi-account-plus</v-icon>
                 Sign UP
               </v-btn>

@@ -1,12 +1,13 @@
 <template>
   <v-card flat>
     <v-card
-      class="mx-auto"
-      max-width="500"
-      style="margin-top: 20px;"
+      class="mx-auto mt-12"
+      :height="height"
+      :max-width="maxWidth"
     >
       <v-toolbar color="blue lighten-3" flat>
         <v-toolbar-title style="color: white">{{ title }}</v-toolbar-title>
+        <slot name="extension"/>
       </v-toolbar>
       <v-divider></v-divider>
       <v-card-text>
@@ -21,7 +22,9 @@
 <script>
 export default {
   props: [
-    'title'
+    'title',
+    'maxWidth',
+    'height'
   ]
 }
 </script>

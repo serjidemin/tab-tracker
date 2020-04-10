@@ -1,5 +1,5 @@
 <template>
-  <panel title="Login">
+  <panel maxWidth="500" title="Login">
       <v-text-field
         type="email"
         name="email"

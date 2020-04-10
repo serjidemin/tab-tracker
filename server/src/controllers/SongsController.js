@@ -13,6 +13,16 @@ module.exports ={
             })
         }
     },
+    async show (req, res) {
+        try {
+            const song = await Song.findByPk(req.params.songId)
+            res.send(song)
+        } catch (e) {
+            res.status(500).send({
+                error: 'an error has occured trying to find the song'
+            })
+        }
+    },
     async post (req, res) {
         try {
             const song = await Song.create(req.body)
@@ -20,6 +30,20 @@ module.exports ={
         } catch (e) {
             res.status(500).send({
                 error: 'an error has occured trying to create the songs'
+            })
+        }
+    },
+    async put (req, res) {
+        try {
+            const song = await Song.update(req.body, {
+                where: {
+                    id: req.params.songId
+                }
+            })
+            res.send(req.body)
+        } catch (e) {
+            res.status(500).send({
+                error: 'an error has occured trying to update the song'
             })
         }
     }
