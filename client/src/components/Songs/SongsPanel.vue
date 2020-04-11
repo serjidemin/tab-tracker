@@ -8,7 +8,7 @@
         absolute
         right
         fab
-        to="/songs/create"
+        :to="{name: 'songs-create'}"
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -31,12 +31,12 @@
             <v-btn
               class="ma-2"
               outlined
-              @click="navigateTo({
+              :to="{
                 name: 'song',
                 params: {
                   songId: song.id
                 }
-              })">
+              }">
               View
             </v-btn>
           </v-col>
@@ -52,7 +52,6 @@
 
 <script>
 import SongsService from '@/services/SongsService'
-import Panel from '@/components/Panel'
 
 export default {
   data () {
@@ -60,13 +59,13 @@ export default {
       songs: null
     }
   },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.songs = (await SongsService.index(value)).data
+      }
     }
-  },
-  components: {
-    Panel
   },
   async mounted () {
     this.songs = (await SongsService.index()).data

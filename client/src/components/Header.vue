@@ -9,16 +9,19 @@
 <!--      <v-app-bar-nav-icon></v-app-bar-nav-icon>-->
 
       <v-toolbar-title>
-        <span class="home" @click="navigateTo({name: 'root'})">
+        <router-link
+          tag="span"
+          class="home"
+          :to="{name: 'songs'}">
           TabTracker
-        </span>
+        </router-link>
       </v-toolbar-title>
 
       <v-toolbar-items style="margin-left: 10px">
         <v-btn
           color="blue lighten-3"
           depressed
-          to="/songs">
+          :to="{name: 'songs'}">
             <v-icon left>mdi-folder-open</v-icon>
           BROWSE
         </v-btn>
@@ -29,7 +32,7 @@
               <v-btn
                 color="blue lighten-3"
                 depressed
-                to="/login">
+                :to="{name: 'login'}">
                 <v-icon left>mdi-account</v-icon>
                 Sign IN
               </v-btn>
@@ -39,7 +42,7 @@
               <v-btn
                 color="blue lighten-3"
                 depressed
-                to="/register">
+                :to="{name: 'register'}">
                 <v-icon left>mdi-account-plus</v-icon>
                 Sign UP
               </v-btn>
@@ -83,14 +86,11 @@
 <script>
 export default {
   methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    },
     logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        name: 'root'
+        name: 'songs'
       })
     }
   }

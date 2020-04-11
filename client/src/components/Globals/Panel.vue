@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
     <v-card
-      class="mx-auto mt-12"
+      class="mx-auto"
       :height="height"
       :max-width="maxWidth"
     >

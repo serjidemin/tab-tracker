@@ -15,12 +15,14 @@
         <v-btn
           class="ma-2"
           outlined
-          @click="navigateTo({
+          :to="{
                 name: 'song-edit',
-                params: {
-                  songId: song.id
+                params () {
+                  return {
+                    songId: song.id
+                  }
                 }
-              })">
+              }">
           Edit
         </v-btn>
       </v-col>
@@ -35,19 +37,10 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 export default {
   props: [
     'song'
-  ],
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    }
-  },
-  components: {
-    Panel
-  }
+  ]
 }
 </script>
 
