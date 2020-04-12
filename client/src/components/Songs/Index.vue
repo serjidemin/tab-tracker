@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row dense>
-      <v-col cols="5">
+      <v-col cols="5" v-if="isUserLoggedIn">
         <songs-bookmarks/>
         <recently-viewed-songs class="mt-2"/>
       </v-col>
@@ -19,12 +19,18 @@ import SongsBookmarks from './SongsBookmarks'
 import RecentlyViewedSongs from './RecentlyViewedSongs'
 import SongsSearchPanel from './SongsSearchPanel'
 import SongsService from '@/services/SongsService'
+import {mapState} from 'vuex'
 
 export default {
   data () {
     return {
       songs: null
     }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
   },
   components: {
     SongsPanel,
