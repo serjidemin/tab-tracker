@@ -1,8 +1,8 @@
 <template>
-  <v-layot>
+  <div>
     <songs-search-panel />
     <songs-panel />
-  </v-layot>
+  </div>
 </template>
 
 <script>

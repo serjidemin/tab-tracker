@@ -30,7 +30,7 @@ import SongMetadata from '@/components/ViewSong/SongMetadata'
 export default {
   data () {
     return {
-      song: null
+      song: {}
     }
   },
   async mounted () {

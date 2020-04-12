@@ -1,9 +1,10 @@
 <template>
   <panel title="YouTube Video">
-    <youtube
-      :video-id="youtubeId"
-      player-width="100%"
-      player-height="185px"></youtube>
+<!--    TODO: change plagin for youtube (error) -->
+<!--    <youtube-->
+<!--      :video-id="youtubeId"-->
+<!--      player-width="100%"-->
+<!--      player-height="185px"></youtube>-->
   </panel>
 </template>
 
